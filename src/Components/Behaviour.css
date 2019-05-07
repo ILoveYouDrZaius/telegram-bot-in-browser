@@ -1,0 +1,48 @@
+.behaviour-container {
+  display: grid;
+  grid-template-areas:
+    "triggers-type ."
+    "triggers-title replies-title"
+    "triggers replies";
+  grid-template-columns: 50% 50%;
+}
+
+.triggers-container__type {
+  grid-area: triggers-type;
+  width: 50%;
+}
+
+.triggers-container__title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  grid-area: triggers-title;
+  margin-bottom: 5px;
+}
+
+.replies-container__title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  grid-area: replies-title;
+  margin-bottom: 5px;
+}
+
+.triggers-container__triggers {
+  grid-area: triggers;
+}
+
+.replies-container__replies {
+  grid-area: replies;
+}
+
+.trigger,
+.reply {
+  display: flex;
+  margin: 2px 0 2px 0;
+}
+
+.trigger__text,
+.reply__text {
+  width: 60%;
+}
