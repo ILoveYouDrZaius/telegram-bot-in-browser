@@ -3,7 +3,7 @@ export default class Behaviour {
         if ((!triggers || triggers.length === 0) ||
             (!replies || replies.length === 0) ||
             (!type)) {
-                throw 'Invalid parameters';
+                throw new Error('Invalid parameters');
             }
         this.triggers = triggers;
         this.replies = replies;
@@ -25,12 +25,13 @@ export default class Behaviour {
 
     getRegex() {
         if (!this.regex) {
-            if (this.type === 1) {
-                this.regex = new RegExp(this.triggers.reduce((regex, current) => `${regex}|${current}`));
-            } else if (this.type === 2) {
-                this.regex = new RegExp(this.triggers.reduce((regex, current) => `${regex}(?=.*${current})`, ''));
+            const type = Number(this.type);
+            if (type === 1) {
+                this.regex = new RegExp(this.triggers.reduce((total, current) => `${total}(?=.*${current.text})`, ''));
+            } else if (type === 2) {
+                this.regex = new RegExp(this.triggers.reduce((total, current) => `${total}|${current.text}`, '').substr(1));
             } else {
-                throw 'Behaviour with invalid type';
+                throw new Error('Behaviour with invalid type');
             }
         }
         return this.regex;

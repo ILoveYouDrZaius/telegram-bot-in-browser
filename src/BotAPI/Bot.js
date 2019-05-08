@@ -14,18 +14,20 @@ export default class Bot {
     addBehaviour(behaviour) {
         this.bot.onText(behaviour.getRegex(), (msg) => {
             const reply = behaviour.replies[Math.floor(Math.random() * behaviour.replies.length)];
-            this.bot.sendMessage(msg.chat.id, reply);
+            this.bot.sendMessage(msg.chat.id, reply.text);
         });
         this.behaviours.push(behaviour);
     }
     
     removeBehaviour(id) {
         const behaviourToRemove = this.behaviours.find(behaviour => behaviour.id === id);
-        const regexToRemove = behaviourToRemove.getRegex();
-        
-        behaviourToRemove.restart();
-        this.bot.removeTextListener(regexToRemove);
-        this.behaviours = this.behaviours.filter(behaviour => behaviour.id !== id);
+        if (behaviourToRemove) {
+            const regexToRemove = behaviourToRemove.getRegex();
+            
+            behaviourToRemove.restart();
+            this.bot.removeTextListener(regexToRemove);
+            this.behaviours = this.behaviours.filter(behaviour => behaviour.id !== id);
+        }
     }
 
 }

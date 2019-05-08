@@ -29,7 +29,6 @@ class Behaviour extends React.Component {
 
   handleRemoveTrigger(id, event) {
     event.persist();
-    console.log(id);
     const behaviour = this.props.behaviour;
     behaviour.triggers = behaviour.triggers.filter(
       trigger => trigger.id !== id
@@ -39,7 +38,6 @@ class Behaviour extends React.Component {
 
   handleRemoveReply(id, event) {
     event.persist();
-    console.log(id);
     const behaviour = this.props.behaviour;
     behaviour.replies = behaviour.replies.filter(reply => reply.id !== id);
     this.props.behaviourOnChange(behaviour);

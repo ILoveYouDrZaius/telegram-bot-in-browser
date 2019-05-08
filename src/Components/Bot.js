@@ -28,6 +28,21 @@ class Bot extends React.Component {
         return behaviour;
       })
     });
+    let newBehaviour = { ...event };
+    newBehaviour.triggers = newBehaviour.triggers.filter(trigger => trigger.text !== '');
+    newBehaviour.replies = newBehaviour.replies.filter(reply => reply.text !== '');
+    this.botApi.removeBehaviour(newBehaviour.id);
+    if (((newBehaviour.triggers && newBehaviour.triggers.length > 0) &&
+      (newBehaviour.replies && newBehaviour.replies.length > 0) &&
+      (newBehaviour.type))) {
+        const behaviourAPI = new BehaviourAPI(
+          newBehaviour.triggers,
+          newBehaviour.replies,
+          newBehaviour.type,
+          newBehaviour.id
+        );
+        this.botApi.addBehaviour(behaviourAPI);
+      }
   }
 
   handleTokenChange(event) {
@@ -35,10 +50,7 @@ class Bot extends React.Component {
       this.setState({
         token: event.target.value
       });
-      console.log(event.target.value);
-      this.bot = new BotAPI(event.target.value);
-      const behaviourObject = new BehaviourAPI([ 'haha', 'no', 'maybe' ], [ 'omggggggg' ], 1);
-      this.bot.addBehaviour(behaviourObject);
+      this.botApi = new BotAPI(event.target.value);
     } else if (event.target.value.length > 45) {
       this.setState({
         token: event.target.value.substring(0, 45)
