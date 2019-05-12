@@ -46,3 +46,8 @@ select {
   border-radius: 2px;
   padding: 1px;
 }
+
+.title-and-button {
+  display: flex;
+  align-items: center;
+}

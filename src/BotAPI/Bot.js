@@ -2,13 +2,8 @@ import TelegramBot from 'node-telegram-bot-api';
 
 export default class Bot {
     constructor(token) {
-        if (!Bot.instance) {
-            this.behaviours = [];
-            this.bot = new TelegramBot(token, {polling: true});
-            Bot.instance = this;
-        }
-
-        return this.instance;
+        this.behaviours = [];
+        this.bot = new TelegramBot(token, {polling: true});
     }
 
     addBehaviour(behaviour) {

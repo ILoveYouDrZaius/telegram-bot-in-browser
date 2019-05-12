@@ -115,7 +115,10 @@ class Behaviour extends React.Component {
 
     return (
       <div>
-        <h3>Behaviour {this.props.behaviour.id}</h3>
+        <div className="title-and-button">
+          <h3>Behaviour {this.props.behaviour.id}</h3>
+          <button className="remove-button" onClick={this.props.removeBehaviour}>-</button>
+        </div>
         <div className="behaviour-container">
           <select
             value={this.props.behaviour.type}
